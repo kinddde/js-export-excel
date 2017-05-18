@@ -1,0 +1,13 @@
+{
+  "presets": [
+    "babel-preset-es2015",
+    "babel-preset-stage-2",
+
+  ],
+  "plugins": [["component", [
+    {
+      "libraryName": "element-ui",
+       "styleLibraryName": "~theme"
+    }
+  ]]]
+}
