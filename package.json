@@ -1,9 +1,21 @@
 {
-  "name": "customer_system",
-  "description": "A Vue.js project",
+  "name": "js-export-excel",
+  "description": "json export excel",
   "version": "1.0.0",
   "author": "kin <cuikangjie_90h@126.com>",
-  "private": true,
+  "private": false,
+  "license": "MIT",
+  "main": "./src/json-export-excel.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:cuikangjie/json-to-excel.git"
+  },
+  "keywords": [
+    "json export",
+    "excel",
+    "json exportexcel"
+
+  ],
   "scripts": {
     "dev": "webpack-dev-server --hot",
     "build": "webpack --progress --hide-modules"
