@@ -6,6 +6,8 @@
 
 > 适用于webpack打包
 
+> 直接引入js请查看[JsonExportExcel](https://github.com/cuikangjie/JsonExportExcel)
+
 ## 下载
 
 ```

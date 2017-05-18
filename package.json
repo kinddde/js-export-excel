@@ -1,19 +1,19 @@
 {
   "name": "js-export-excel",
   "description": "json export excel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "kin <cuikangjie_90h@126.com>",
   "private": false,
   "license": "MIT",
   "main": "./src/json-export-excel.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:cuikangjie/json-to-excel.git"
+    "url": "git@github.com:cuikangjie/js-export-excel.git"
   },
   "keywords": [
     "json export",
     "excel",
-    "json exportexcel"
+    "json export excel"
 
   ],
   "scripts": {
@@ -23,7 +23,8 @@
   "dependencies": {
     "xlsx": "^0.8.1",
     "file-saver": "^1.3.3",
-    "Blob.js":"^1.0.1"
+    "Blob.js":"^1.0.1",
+    "script-loader": "0.7.0"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
@@ -34,7 +35,6 @@
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.0",
     "babel-plugin-component":"^0.9.1",
-    "script-loader": "0.7.0",
     "extract-text-webpack-plugin": "^2.1.0"
   }
 }
