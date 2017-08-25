@@ -4,7 +4,7 @@
   "version": "1.0.3",
   "author": "kin <cuikangjie_90h@126.com>",
   "private": false,
-  "license": "Apache",
+  "license": "Apache-2.0",
   "main": "./src/json-export-excel.js",
   "repository": {
     "type": "git",
