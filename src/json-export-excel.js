@@ -8,17 +8,16 @@ require('script-loader!blob.js/Blob');
  * josn导出excel
  * mail：cuikangjie_90h@126.com
  */
- // 过滤
  const changeData = function(data, filter) {
-     var data = data,
-         filter = filter,
+     let sj = data,
+         f = filter,
          re = [];
-     typeof data[0][0] == 'undefined' ? (function() {
+     Array.isArray(data) ? (function() {
          //对象
-         filter ? (function() {
+         f ? (function() {
              //存在过滤
-             data.forEach(function(obj) {
-                 var one = [];
+             sj.forEach(function(obj) {
+                 let one = [];
                  filter.forEach(function(no) {
                      one.push(obj[no]);
                  });
@@ -26,9 +25,9 @@ require('script-loader!blob.js/Blob');
              });
          })() : (function() {
              //不存在过滤
-             data.forEach(function(obj) {
-                 var col = Object.keys(obj);
-                 var one = [];
+             sj.forEach(function(obj) {
+                 let col = Object.keys(obj);
+                 let one = [];
                  col.forEach(function(no) {
                      one.push(obj[no]);
                  });
@@ -37,17 +36,17 @@ require('script-loader!blob.js/Blob');
 
          })();
      })() : (function() {
-         re = data;
+         re = sj;
      })();
      return re;
  }
 
 
  // 转换数据
- const sheet_from_array_of_arrays = function(data) {
+ const sheetChangeData = function(data) {
 
-     var ws = {};
-     var range = {
+     let ws = {};
+     let range = {
          s: {
              c: 10000000,
              r: 10000000
@@ -57,17 +56,17 @@ require('script-loader!blob.js/Blob');
              r: 0
          }
      };
-     for (var R = 0; R != data.length; ++R) {
-         for (var C = 0; C != data[R].length; ++C) {
+     for (let R = 0; R != data.length; ++R) {
+         for (let C = 0; C != data[R].length; ++C) {
              if (range.s.r > R) range.s.r = R;
              if (range.s.c > C) range.s.c = C;
              if (range.e.r < R) range.e.r = R;
              if (range.e.c < C) range.e.c = C;
-             var cell = {
+             let cell = {
                  v: data[R][C]
              };
              if (cell.v == null) continue;
-             var cell_ref = XLSX.utils.encode_cell({
+             let cell_ref = XLSX.utils.encode_cell({
                  c: C,
                  r: R
              });
@@ -86,46 +85,46 @@ require('script-loader!blob.js/Blob');
      return ws;
  }
 
-
  const s2ab = function(s) {
-     var buf = new ArrayBuffer(s.length);
-     var view = new Uint8Array(buf);
-     for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+     let buf = new ArrayBuffer(s.length);
+     let view = new Uint8Array(buf);
+     for (let i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
      return buf;
  };
  const datenum = function(v, date1904) {
      if (date1904) v += 1462;
-     var epoch = Date.parse(v);
+     let epoch = Date.parse(v);
      return (epoch - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000);
  };
 
+module.exports = class ExportJsonExcel {
 
-function ExportJsonExcel(option) {
+  constructor(option){
     this.fileName = option.fileName || 'download';
     this.datas = option.datas;
     this.workbook = {
         SheetNames: [],
         Sheets: {}
     };
-}
+  }
 
-ExportJsonExcel.prototype.instance = function() {
-    var _this = this,
+  instance(){
+    let _this = this,
         wb = _this.workbook;
 
     _this.datas.forEach(function(data, index) {
-        var sheetHeader = data.sheetHeader || null;
-        var sheetData = data.sheetData;
-        var sheetName = data.sheetName || 'sheet' + (index + 1);
-        var sheetFilter = data.sheetFilter || null;
+        let sheetHeader = data.sheetHeader || null;
+        let sheetData = data.sheetData;
+        let sheetName = data.sheetName || 'sheet' + (index + 1);
+        let sheetFilter = data.sheetFilter || null;
 
-        var data = changeData(sheetData, sheetFilter);
+        sheetData = changeData(sheetData, sheetFilter);
 
         if (sheetHeader) {
-            data.unshift(sheetHeader)
+            sheetData.unshift(sheetHeader)
         }
 
-        var ws = sheet_from_array_of_arrays(data);
+        let ws = sheetChangeData(sheetData);
 
         ws['!merges'] = [];
 
@@ -133,7 +132,7 @@ ExportJsonExcel.prototype.instance = function() {
         wb.Sheets[sheetName] = ws;
     });
 
-    var wbout = XLSX.write(wb, {
+    let wbout = XLSX.write(wb, {
         bookType: 'xlsx',
         bookSST: false,
         type: 'binary'
@@ -141,12 +140,9 @@ ExportJsonExcel.prototype.instance = function() {
     saveAs(new Blob([s2ab(wbout)], {
         type: "application/octet-stream"
     }), _this.fileName + ".xlsx")
-}
+  }
 
-
-
-ExportJsonExcel.prototype.saveExcel = function() {
+  saveExcel(){
     this.instance();
-};
-
-module.exports =  ExportJsonExcel;
+  }
+}
