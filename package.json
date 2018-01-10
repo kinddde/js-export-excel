@@ -5,7 +5,7 @@
   "author": "kin <cuikangjie_90h@126.com>",
   "private": false,
   "license": "Apache-2.0",
-  "main": "./src/json-export-excel.js",
+  "main": "./src/js-export-excel.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:cuikangjie/js-export-excel.git"
