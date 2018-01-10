@@ -21,7 +21,7 @@ module.exports = {
                 exclude: /node_modules/,
                 options: {
                     presets: [
-                        ['env']
+                        ['es2015']
                     ]
                 }
             }
