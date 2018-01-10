@@ -1,7 +1,7 @@
 {
   "name": "js-export-excel",
   "description": "json export excel",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "kin <cuikangjie_90h@126.com>",
   "private": false,
   "license": "Apache-2.0",
@@ -16,7 +16,7 @@
     "json export excel"
   ],
   "scripts": {
-    "dev": "webpack-dev-server --hot --port 5000 --host 0.0.0.0",
+    "dev": "webpack-dev-server --hot --port 9000 --host 0.0.0.0",
     "build": "webpack --progress --hide-modules"
   },
   "dependencies": {
