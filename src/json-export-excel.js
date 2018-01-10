@@ -97,7 +97,7 @@ require('script-loader!blob.js/Blob');
      return (epoch - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000);
  };
 
-module.exports = class ExportJsonExcel {
+ exports["default"] = class ExportJsonExcel {
 
   constructor(option){
     this.fileName = option.fileName || 'download';
@@ -146,3 +146,5 @@ module.exports = class ExportJsonExcel {
     this.instance();
   }
 }
+
+module.exports = exports["default"];
