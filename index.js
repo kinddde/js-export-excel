@@ -1,1 +1,1 @@
-module.exports = require("./src/json-export-excel.js")
+module.exports = require("./src/js-export-excel.js");

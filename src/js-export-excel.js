@@ -97,52 +97,52 @@ require('script-loader!blob.js/Blob');
      return (epoch - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000);
  };
 
-module.exports = class ExportJsonExcel {
-
-  constructor(option){
-    this.fileName = option.fileName || 'download';
-    this.datas = option.datas;
-    this.workbook = {
-        SheetNames: [],
-        Sheets: {}
-    };
-  }
-
-  instance(){
-    let _this = this,
-        wb = _this.workbook;
-
-    _this.datas.forEach(function(data, index) {
-        let sheetHeader = data.sheetHeader || null;
-        let sheetData = data.sheetData;
-        let sheetName = data.sheetName || 'sheet' + (index + 1);
-        let sheetFilter = data.sheetFilter || null;
-
-        sheetData = changeData(sheetData, sheetFilter);
-
-        if (sheetHeader) {
-            sheetData.unshift(sheetHeader)
+ const exportExcel = function (options) {
+    let _options = {
+        fileName: options.fileName || 'download',
+        datas: options.datas,
+        workbook: {
+            SheetNames: [],
+            Sheets: {}
         }
+    }
 
-        let ws = sheetChangeData(sheetData);
+    const instance = {
+        saveExcel: function () {
+            let wb = _options.workbook;
+        
+            _options.datas.forEach(function(data, index) {
+                let sheetHeader = data.sheetHeader || null;
+                let sheetData = data.sheetData;
+                let sheetName = data.sheetName || 'sheet' + (index + 1);
+                let sheetFilter = data.sheetFilter || null;
+        
+                sheetData = changeData(sheetData, sheetFilter);
+        
+                if (sheetHeader) {
+                    sheetData.unshift(sheetHeader)
+                }
+        
+                let ws = sheetChangeData(sheetData);
+        
+                ws['!merges'] = [];
+        
+                wb.SheetNames.push(sheetName);
+                wb.Sheets[sheetName] = ws;
+            });
+        
+            let wbout = XLSX.write(wb, {
+                bookType: 'xlsx',
+                bookSST: false,
+                type: 'binary'
+            });
+            saveAs(new Blob([s2ab(wbout)], {
+                type: "application/octet-stream"
+            }), _options.fileName + ".xlsx")
+        }
+    }
 
-        ws['!merges'] = [];
+    return instance;
+ }
 
-        wb.SheetNames.push(sheetName);
-        wb.Sheets[sheetName] = ws;
-    });
-
-    let wbout = XLSX.write(wb, {
-        bookType: 'xlsx',
-        bookSST: false,
-        type: 'binary'
-    });
-    saveAs(new Blob([s2ab(wbout)], {
-        type: "application/octet-stream"
-    }), _this.fileName + ".xlsx")
-  }
-
-  saveExcel(){
-    this.instance();
-  }
-}
+ module.exports = exportExcel;
