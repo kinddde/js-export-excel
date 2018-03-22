@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "xlsx": "^0.11.17",
-    "file-saver": "^1.3.3",
+    "file-saver": "1.3.3",
     "blob.js": "^1.0.1",
     "script-loader": "0.7.2"
   },
