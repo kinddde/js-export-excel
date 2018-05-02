@@ -1,4 +1,4 @@
-const ExportJsonExcel = require('../')
+const ExportJsonExcel = require('../src/js-export-excel')
 
 var option = {};
 option.datas = [{

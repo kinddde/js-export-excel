@@ -27,7 +27,7 @@ module.exports = {
             }
         ]
     },
-    devServer: {       
+    devServer: {
         historyApiFallback: true,
         contentBase: path.join(__dirname, "/test"),
         compress: false,
@@ -53,7 +53,7 @@ module.exports = {
     ]
 }
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env && process.env.NODE_ENV === 'production') {
     // module.exports.devtool = '#source-map'
 
     module.exports.plugins = (module.exports.plugins || []).concat([
