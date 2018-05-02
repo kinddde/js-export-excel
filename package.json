@@ -1,7 +1,7 @@
 {
   "name": "js-export-excel",
   "description": "json export excel",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "kin <cuikangjie_90h@126.com>",
   "private": false,
   "license": "Apache-2.0",
