@@ -97,6 +97,14 @@ require('script-loader!blob.js/Blob');
      return (epoch - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000);
  };
 
+ const columnwidths = function(columnWidths){
+    let out = [];
+    out = columnWidths.map(function(item){
+        return  {width: item ? parseInt(256 * (Number(item) / 100)) : 20}
+    })
+    return out;
+ }
+
  const exportExcel = function (options) {
     let _options = {
         fileName: options.fileName || 'download',
@@ -116,6 +124,7 @@ require('script-loader!blob.js/Blob');
                 let sheetData = data.sheetData;
                 let sheetName = data.sheetName || 'sheet' + (index + 1);
                 let sheetFilter = data.sheetFilter || null;
+                let columnWidths = data.columnWidths || [];
         
                 sheetData = changeData(sheetData, sheetFilter);
         
@@ -126,6 +135,8 @@ require('script-loader!blob.js/Blob');
                 let ws = sheetChangeData(sheetData);
         
                 ws['!merges'] = [];
+
+                ws['!cols'] = columnwidths(columnWidths);
         
                 wb.SheetNames.push(sheetName);
                 wb.Sheets[sheetName] = ws;
