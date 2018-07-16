@@ -3,6 +3,7 @@
 > 纯js导出excel
 
 ## tip
+> bug or 建议 请在 [issues](https://github.com/cuikangjie/js-export-excel/issues) 提
 
 > 需使用babel编译
 
