@@ -1,11 +1,11 @@
 {
   "name": "js-export-excel",
   "description": "json export excel",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "kin <cuikangjie_90h@126.com>",
   "private": false,
   "license": "Apache-2.0",
-  "main": "./src/js-export-excel.js",
+  "main": "./lib/index.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:cuikangjie/js-export-excel.git"
@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "dev": "webpack-dev-server --hot --port 9000 --host 0.0.0.0",
-    "build": "cross-env NODE_ENV=production  webpack --progress --hide-modules"
+    "build": "node ./build.js"
   },
   "dependencies": {
     "blob.js": "^1.0.1",
