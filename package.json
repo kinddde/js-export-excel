@@ -1,7 +1,7 @@
 {
   "name": "js-export-excel",
   "description": "json export excel",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "author": "kin <cuikangjie_90h@126.com>",
   "private": false,
   "license": "Apache-2.0",
@@ -17,7 +17,8 @@
   ],
   "scripts": {
     "dev": "webpack-dev-server --hot --port 9000 --host 0.0.0.0",
-    "build": "node ./build.js"
+    "build": "node ./build.js",
+    "prepublish": "yarn run build"
   },
   "dependencies": {
     "blob.js": "^1.0.1",
