@@ -4,7 +4,7 @@
 
 ## tip
 
-> bug or 建议 请在 [issues](https://github.com/cuikangjie/js-export-excel/issues) 提
+> Bug please mention on [issues](https://github.com/cuikangjie/js-export-excel/issues)
 
 ## log
 
@@ -17,10 +17,14 @@
 
   > 添加列宽设置
 
-## 下载
+## download
 
 ```
 npm install js-export-excel
+
+or
+
+yarn add js-export-excel
 ```
 
 ## documentation
