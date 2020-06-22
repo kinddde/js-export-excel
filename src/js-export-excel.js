@@ -117,7 +117,7 @@ const exportExcel = function(options) {
   };
 
   const instance = {
-    saveExcel: function(autoSave = true) {
+    saveExcel: function() {
       let wb = _options.workbook;
 
       _options.datas.forEach(function(data, index) {
@@ -148,7 +148,7 @@ const exportExcel = function(options) {
         bookSST: false,
         type: "binary"
       });
-      if (autoSave) {
+      if (!options.saveAsBlob) {
         saveAs(
           new Blob([s2ab(wbout)], {
             type: "application/octet-stream"
