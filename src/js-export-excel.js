@@ -106,7 +106,7 @@ const columnwidths = function(columnWidths) {
   return out;
 };
 
-const exportExcel = function(options, autoSave = true) {
+const exportExcel = function(options) {
   let _options = {
     fileName: options.fileName || "download",
     datas: options.datas,
@@ -117,7 +117,7 @@ const exportExcel = function(options, autoSave = true) {
   };
 
   const instance = {
-    saveExcel: function() {
+    saveExcel: function(autoSave = true) {
       let wb = _options.workbook;
 
       _options.datas.forEach(function(data, index) {
