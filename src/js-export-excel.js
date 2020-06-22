@@ -106,7 +106,7 @@ const columnwidths = function(columnWidths) {
   return out;
 };
 
-const exportExcel = function(options) {
+const exportExcel = function(options, autoSave = true) {
   let _options = {
     fileName: options.fileName || "download",
     datas: options.datas,
@@ -148,12 +148,16 @@ const exportExcel = function(options) {
         bookSST: false,
         type: "binary"
       });
-      saveAs(
-        new Blob([s2ab(wbout)], {
-          type: "application/octet-stream"
-        }),
-        _options.fileName + ".xlsx"
-      );
+      if (autoSave) {
+        saveAs(
+          new Blob([s2ab(wbout)], {
+            type: "application/octet-stream"
+          }),
+          _options.fileName + ".xlsx"
+        );
+      } else {
+        return new File([s2ab(wbout)], _options.fileName + ".xlsx", { type: "application/octet-stream", lastModified: Date.now() });
+      }
     }
   };
 
