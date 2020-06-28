@@ -6,17 +6,6 @@
 
 > Bug please mention on [issues](https://github.com/cuikangjie/js-export-excel/issues)
 
-## log
-
-- 2018.8.15 (v: 1.1.1)
-
-  > 优化打包
-  > 添加 babel 编译
-
-- 2018.7.16 (v: 1.1.0)
-
-  > 添加列宽设置
-
 ## download
 
 ```
@@ -30,29 +19,87 @@ yarn add js-export-excel
 ## documentation
 
 ```js
-const ExportJsonExcel = require('js-export-excel')
+// 直接导出文件
+const ExportJsonExcel = require("js-export-excel");
 
-var option={};
+var option = {};
 
-option.fileName = 'excel'
-option.datas=[
+option.fileName = "excel";
+
+option.datas = [
   {
-    sheetData:[{one:'一行一列',two:'一行二列'},{one:'二行一列',two:'二行二列'}],
-    sheetName:'sheet',
-    sheetFilter:['two','one'],
-    sheetHeader:['第一列','第二列'],
-    columnWidths: [20, 20]
+    sheetData: [
+      { one: "一行一列", two: "一行二列" },
+      { one: "二行一列", two: "二行二列" },
+    ],
+    sheetName: "sheet",
+    sheetFilter: ["two", "one"],
+    sheetHeader: ["第一列", "第二列"],
+    columnWidths: [20, 20],
   },
   {
-    sheetData:[{one:'一行一列',two:'一行二列'},{one:'二行一列',two:'二行二列'}]
-  }
+    sheetData: [
+      { one: "一行一列", two: "一行二列" },
+      { one: "二行一列", two: "二行二列" },
+    ],
+  },
 ];
 
 var toExcel = new ExportJsonExcel(option); //new
 toExcel.saveExcel(); //保存
 ```
 
+```js
+// 导出Blob，支持压缩等其他操作
+const ExportJsonExcel = require("js-export-excel");
+const JSZip = require("jszip");
+
+var option = {};
+
+option.fileName = "excel";
+
+option.saveAsBlob = true;
+
+option.datas = [
+  {
+    sheetData: [
+      { one: "一行一列", two: "一行二列" },
+      { one: "二行一列", two: "二行二列" },
+    ],
+    sheetName: "sheet",
+    sheetFilter: ["two", "one"],
+    sheetHeader: ["第一列", "第二列"],
+    columnWidths: [20, 20],
+  },
+  {
+    sheetData: [
+      { one: "一行一列", two: "一行二列" },
+      { one: "二行一列", two: "二行二列" },
+    ],
+  },
+];
+
+var toExcel = new ExportJsonExcel(option); //new
+
+let file = toExcel.saveExcel();
+
+// 压缩文件
+var zip = new JSZip();
+
+// 多个excel 依次加入(fileName不能相同)
+zip.file(file.name, file);
+
+zip.generateAsync({ type: "blob" }).then(function (content) {
+  // see FileSaver.js
+  saveAs(content, "example.zip"); // 下载文件
+});
+```
+
 ## option
+
+- fileName 下载文件名(默认：download)
+
+- saveAsBlob 导出文件流(默认： false)
 
 - datas 数据
 
@@ -67,8 +114,6 @@ toExcel.saveExcel(); //保存
   columnWidths: [] //列宽 需与列顺序对应
   }]
   ```
-
-- fileName 下载文件名(默认：download)
 
 ### sheet option
 
@@ -102,10 +147,6 @@ toExcel.saveExcel(); //保存
   ```javascript
   sheetFilter = ["two", "one"];
   ```
-
-## 效果预览
-
-![Paste_Image.png](http://images.cuikangjie.com/image-1499047876636-data.png)
 
 ## 浏览器支持
 

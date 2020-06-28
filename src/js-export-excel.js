@@ -110,10 +110,12 @@ const exportExcel = function(options) {
   let _options = {
     fileName: options.fileName || "download",
     datas: options.datas,
+    saveAsBlob: options.saveAsBlob || false,
     workbook: {
       SheetNames: [],
       Sheets: {}
-    }
+    },
+
   };
 
   const instance = {
@@ -148,7 +150,7 @@ const exportExcel = function(options) {
         bookSST: false,
         type: "binary"
       });
-      if (!options.saveAsBlob) {
+      if (!_options.saveAsBlob) {
         saveAs(
           new Blob([s2ab(wbout)], {
             type: "application/octet-stream"
