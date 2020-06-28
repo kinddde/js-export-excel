@@ -148,12 +148,16 @@ const exportExcel = function(options) {
         bookSST: false,
         type: "binary"
       });
-      saveAs(
-        new Blob([s2ab(wbout)], {
-          type: "application/octet-stream"
-        }),
-        _options.fileName + ".xlsx"
-      );
+      if (!options.saveAsBlob) {
+        saveAs(
+          new Blob([s2ab(wbout)], {
+            type: "application/octet-stream"
+          }),
+          _options.fileName + ".xlsx"
+        );
+      } else {
+        return new File([s2ab(wbout)], _options.fileName + ".xlsx", { type: "application/octet-stream", lastModified: Date.now() });
+      }
     }
   };
 
