@@ -3,8 +3,8 @@ const ExportJsonExcel = require('../src/js-export-excel')
 var option = {};
 option.datas = [{
         sheetData: [{
-            one: '一行一列',
-            two: '一行二列'
+            one: 2.00,
+            two: 1
         }, {
             one: '二行一列',
             two: '二行二列'
