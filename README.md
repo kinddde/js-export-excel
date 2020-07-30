@@ -8,13 +8,11 @@
 
 ## download
 
-```
-npm install js-export-excel
+    npm install js-export-excel
 
-or
+    or
 
-yarn add js-export-excel
-```
+    yarn add js-export-excel
 
 ## documentation
 
@@ -134,15 +132,15 @@ zip.generateAsync({ type: "blob" }).then(function (content) {
 
 - sheetData 数据源(必须)
 
-  -- 支持超链接解析，格式为 “hyperlink:site url”。eg： hyperlink:https://www.baidu.com
+  > 支持超链接解析，格式为 “hyperlink:site url”。eg： hyperlink:<https://www.baidu.com>
 
-```javascript
-<!--两种形式-->
-<!--第一种 object-->
-[{one:'一行一列',two:'一行二列'},{one:'二行一列',two:'二行二列'}]
-<!--第二种 arrary-->
-[['一行一列','一行二列'],['二行一列','二行二列']]
-```
+  ```javascript
+  <!--两种形式-->
+  <!--第一种 object-->
+  [{one:'一行一列',two:'一行二列'},{one:'二行一列',two:'二行二列'}]
+  <!--第二种 arrary-->
+  [['一行一列','一行二列'],['二行一列','二行二列']]
+  ```
 
 - sheetFilter 列过滤(只有在 data 为 object 下起作用)(可有可无)
 
